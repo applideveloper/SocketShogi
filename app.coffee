@@ -4,7 +4,6 @@ Module dependencies.
 ###
 express = require("express")
 routes = require("./routes")
-user = require("./routes/user")
 http = require("http")
 path = require("path")
 app = express()
@@ -25,8 +24,9 @@ app.use express.static(path.join(__dirname, "public"))
 
 # development only
 app.use express.errorHandler()  if "development" is app.get("env")
+
+
 app.get "/", routes.index
-app.get "/users", user.list
 
 server = http.createServer(app)
 io = require('socket.io').listen(server)
@@ -34,7 +34,7 @@ io = require('socket.io').listen(server)
 
 #require('./controller/solo').init(app)
 
-require('./sockets/front').init(io)
+require('./sockets/front')(io)
 
 server.listen app.get("port"), ->
   console.log "Express server listening on port " + app.get("port")

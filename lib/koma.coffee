@@ -1,4 +1,4 @@
-koma =
+Koma =
   OU: 8
   GYOKU: 8
   HI: 7
@@ -13,4 +13,4 @@ koma =
   SENTE: 101
   GOTE: 102
 
-module.exports = koma
+module.exports = Koma
