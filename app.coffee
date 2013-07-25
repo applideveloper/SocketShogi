@@ -27,6 +27,14 @@ app.use express.static(path.join(__dirname, "public"))
 app.use express.errorHandler()  if "development" is app.get("env")
 app.get "/", routes.index
 app.get "/users", user.list
-http.createServer(app).listen app.get("port"), ->
-  console.log "Express server listening on port " + app.get("port")
 
+server = http.createServer(app)
+io = require('socket.io').listen(server)
+  
+
+#require('./controller/solo').init(app)
+
+require('./sockets/front').init(io)
+
+server.listen app.get("port"), ->
+  console.log "Express server listening on port " + app.get("port")
