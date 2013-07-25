@@ -1,4 +1,4 @@
 exports.index = (req, res) ->
-  res.render "index",
-    title: "Express"
+  res.render 'index'
 
+exports.rooms = require('./rooms')
