@@ -34,7 +34,7 @@ io = require('socket.io').listen(server)
 
 #require('./controller/solo').init(app)
 
-require('./sockets/front')(io)
+require('./sockets/shogi')(io)
 
 server.listen app.get("port"), ->
   console.log "Express server listening on port " + app.get("port")
