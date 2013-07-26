@@ -1,10 +1,10 @@
+_ = require('underscore')
+
 module.exports = (io) ->
-  _ = require('underscore')
   consts = require('../lib/consts')
   Koma = consts.Koma
   Masu = consts.Masu
   Sengo = consts.Sengo
-
   # karidesu
   board = consts.initBoard()
 
@@ -36,6 +36,8 @@ module.exports = (io) ->
         # そのような手はさせない
         # 特に処理無しかな
     socket.on 'nari', (sasite) ->
+      console.log 'nari'
+      console.dir sasite
       # sasite: {masu: Number, koma: Number, sengo: Number}
       sasite && (
         before = _.find board, (factor) ->
