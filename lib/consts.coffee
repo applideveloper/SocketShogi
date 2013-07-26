@@ -18,15 +18,15 @@ exports.Koma = Koma =
   KYO: 2
   FU: 1
   HU: 1
-  RYU: 14
-  RYUOU: 14
-  UMA: 13
-  RYUME: 13
-  NGIN: 12
-  NKEI: 11
-  NKYO: 10
-  TO: 9
-  NFU: 9
+  RYU: -7
+  RYUOU: -7
+  UMA: -6
+  RYUME: -6
+  NGIN: -4
+  NKEI: -3
+  NKYO: -2
+  TO: -1
+  NFU: -1
 
 
   nari: (koma) ->
