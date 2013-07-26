@@ -1,6 +1,5 @@
-//require(['app', 'views/waitgame', 'socket', 'backbone', 'jquery', 'jquerymobile'], function(app, WaitgameView, socket, Backbone, $) {
-require(['app', 'views/waitgame', 'socket', 'backbone', 'jquery'], function(app, WaitgameView, socket, Backbone, $) {
+require(['app', 'views/index', 'socket', 'backbone', 'jquery'], function(app, IndexView, socket, Backbone, $) {
   $(function() {
-    app.render(new WaitgameView());
+    app.render(new IndexView());
   });
 });

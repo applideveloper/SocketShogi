@@ -1,15 +1,9 @@
 extends layout
 
 block script
-  script(src='/socket.io/socket.io.js')
-  script.
-    $(function(){
-      var socket = io.connect('/shogi');
-      socket.on('board changed', function(board) {
-        console.log(board);
-      });
-      console.log(socket);
-      socket.emit('move', {masu: {before: 57, after: 56}, koma: 1, sengo: 101});
-    });
+  script(src='/lib/runtime.js')
+  script(src='/dist/view.js')
+  script(src='/dist/product.js')
 block content
-  h1 Socket Shogi
+  div#main
+  div#modal
