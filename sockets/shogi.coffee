@@ -6,7 +6,7 @@ module.exports = (io) ->
   Sengo = consts.Sengo
 
   # karidesu
-  board = [{masu: 53, koma: Koma.FU, sengo:Sengo.GOTE}, {masu: 57, koma: Koma.FU, sengo: Sengo.SENTE}]
+  board = consts.initBoard()
 
   nsShogi = io.of('/shogi')
   nsShogi.on 'connection', (socket) ->
