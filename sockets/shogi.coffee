@@ -10,6 +10,10 @@ module.exports = (io) ->
 
   nsShogi = io.of('/shogi')
   nsShogi.on 'connection', (socket) ->
+    # TODO kari room
+    roomName = 'はじまりのへや'
+    socket.join roomName
+
     socket.on 'move', (sasite) ->
       # TODO この辺の処理はどっかのモデルのメソッド行き
       # モードによっても変わるので
