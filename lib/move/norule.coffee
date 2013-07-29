@@ -6,7 +6,7 @@ _ = require('underscore')
 # callback (info, newBoard)
 # info: {changed: Boolean, reason: String (if not changed) }
 # newBoard: Board (if changed)
-exports.move = (board, sasite, callback) ->
+module.exports = (board, sasite, callback) ->
 
   if not (sasite?.masu? and typeof sasite.masu.before == "number" and typeof sasite.masu.after == "number")
     callback {changed: false, reason: 'sasite is invalid'}
