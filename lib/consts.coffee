@@ -26,7 +26,6 @@ exports.Koma = Koma =
   TO: 9
   NFU: 9
 
-
   nari: (koma) ->
     switch koma
       when @HI then @RYU
@@ -48,27 +47,27 @@ _.each(_.range(1,10), (num) ->
   factors.push { koma: this.Koma.FU, sengo: this.Sengo.GOTE, masu: num * 10 + 3 }
 factors.push(
   { koma: this.Koma.OU, sengo: this.Sengo.SENTE, masu: 59 } ,
-  { koma: this.Koma.OU, sengo: this.Sengo.GOTE, masu: 51 } ,
+  { koma: this.Koma.OU, sengo: this.Sengo.GOTE,  masu: 51 } ,
   { koma: this.Koma.HI, sengo: this.Sengo.SENTE, masu: 28 } ,
-  { koma: this.Koma.HI, sengo: this.Sengo.GOTE, masu: 82 } ,
+  { koma: this.Koma.HI, sengo: this.Sengo.GOTE,  masu: 82 } ,
   { koma: this.Koma.KAKU, sengo: this.Sengo.SENTE, masu: 88 } ,
-  { koma: this.Koma.KAKU, sengo: this.Sengo.GOTE, masu: 22 } ,
+  { koma: this.Koma.KAKU, sengo: this.Sengo.GOTE,  masu: 22 } ,
   { koma: this.Koma.KIN, sengo: this.Sengo.SENTE, masu: 69 } ,
   { koma: this.Koma.KIN, sengo: this.Sengo.SENTE, masu: 49 } ,
-  { koma: this.Koma.KIN, sengo: this.Sengo.GOTE, masu: 41 } ,
-  { koma: this.Koma.KIN, sengo: this.Sengo.GOTE, masu: 61 } ,
+  { koma: this.Koma.KIN, sengo: this.Sengo.GOTE,  masu: 41 } ,
+  { koma: this.Koma.KIN, sengo: this.Sengo.GOTE,  masu: 61 } ,
   { koma: this.Koma.GIN, sengo: this.Sengo.SENTE, masu: 79 } ,
   { koma: this.Koma.GIN, sengo: this.Sengo.SENTE, masu: 39 } ,
-  { koma: this.Koma.GIN, sengo: this.Sengo.GOTE, masu: 31 } ,
-  { koma: this.Koma.GIN, sengo: this.Sengo.GOTE, masu: 71 } ,
+  { koma: this.Koma.GIN, sengo: this.Sengo.GOTE,  masu: 31 } ,
+  { koma: this.Koma.GIN, sengo: this.Sengo.GOTE,  masu: 71 } ,
   { koma: this.Koma.KEI, sengo: this.Sengo.SENTE, masu: 89 } ,
   { koma: this.Koma.KEI, sengo: this.Sengo.SENTE, masu: 29 } ,
-  { koma: this.Koma.KEI, sengo: this.Sengo.GOTE, masu: 21 } ,
-  { koma: this.Koma.KEI, sengo: this.Sengo.GOTE, masu: 81 } ,
+  { koma: this.Koma.KEI, sengo: this.Sengo.GOTE,  masu: 21 } ,
+  { koma: this.Koma.KEI, sengo: this.Sengo.GOTE,  masu: 81 } ,
   { koma: this.Koma.KYO, sengo: this.Sengo.SENTE, masu: 99 } ,
   { koma: this.Koma.KYO, sengo: this.Sengo.SENTE, masu: 19 } ,
-  { koma: this.Koma.KYO, sengo: this.Sengo.GOTE, masu: 11 } ,
-  { koma: this.Koma.KYO, sengo: this.Sengo.GOTE, masu: 91 }
+  { koma: this.Koma.KYO, sengo: this.Sengo.GOTE,  masu: 11 } ,
+  { koma: this.Koma.KYO, sengo: this.Sengo.GOTE,  masu: 91 }
     
 
 exports.initBoard = ->
