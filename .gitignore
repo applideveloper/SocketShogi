@@ -17,3 +17,7 @@ node_modules/
 
 *.swp
 *.orig
+
+public/dist/
+
+dump.rdb
