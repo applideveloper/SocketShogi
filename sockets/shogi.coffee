@@ -17,11 +17,11 @@ module.exports = (io) ->
 
     socket.on 'move', (sasite) ->
       # sasite: {masu: {before: Number, after: Number}, koma: Number, sengo: Number}
-    move 'norule', board, sasite, (info, newBoard) ->
-      if info.changed
-        board = newBoard
-      else
-        console.log info.reason
+      move 'norule', board, sasite, (info, newBoard) ->
+        if info.changed
+          board = newBoard
+        else
+          console.log info.reason
 
 
     socket.on 'nari', (sasite) ->

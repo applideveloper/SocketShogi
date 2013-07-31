@@ -4,9 +4,16 @@ exports.Sengo = Sengo =
   SENTE: 101
   GOTE: 102
 
+# deprecated. use lib/masu
 exports.Masu =
   KOMADAI: 0
+  isValid: (masu) ->
+    return true if masu is this.KOMADAI
+    masu is masu | 0
+      and masu % 10 isnt 0
+      and 11 <= masu and masu <= 99
 
+# deprecated. use lib/koma
 exports.Koma = Koma =
   OU: 8
   GYOKU: 8
@@ -20,8 +27,10 @@ exports.Koma = Koma =
   HU: 1
   RYU: -7
   RYUOU: -7
+  NHI: -7
   UMA: -6
   RYUME: -6
+  NKAKU: -6
   NGIN: -4
   NKEI: -3
   NKYO: -2
