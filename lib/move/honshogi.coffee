@@ -6,7 +6,7 @@ Koma = require('/lib/koma')
 Sengo = consts.Sengo
 
 # board: Board
-# sasite: {masu: {before: Number, after: Number}, koma: Number, sengo: Number, nari: Boolean}
+# sasite: {masu: {before: Number, after: Number}, koma: Number, sengo: Number, nari: Boolean[非必須]}
 
 # callback (info, newBoard)
 # info: {changed: Boolean, reason: String (if not changed) }
@@ -48,22 +48,28 @@ module.exports = (board, sasite, callback) ->
     callback {changed: false, reason: 'sasite.after の場所に自分の駒がいます'}
     return
 
-  # 動きチェック
   sengo = sasite.sengo
   koma = sasite.koma
   before = sasite.masu.before
   after = sasite.masu.after
 
+  # 動きチェック
   if not isValidMove(koma, before, after, sengo) ->
     callback {changed: false, reason: 'sasite move is not valid'}
     return
 
-  if not hasIkidokoro(koma, after, sengo) ->
+  # 行きどころ
+  if not sasite.nari and not hasIkidokoro(koma, after, sengo) ->
     callback {changed: false, reason: '行きどころのない駒'}
     return
 
+  # 成りチェック
+  if sasite.nari and not canNari(koma, before, after, sengo) ->
+    callback {changed: false, reason: '成ろうとしてるけど成れない'}
+    return
+
   # 竜馬角飛香の間に駒がないか
-  if ~[Koma.RYU, Koma.UMA, Koma.HI, Koma.KAKU, Koma.KYO].indexOf(koma)
+  if before isnt Masu.KOMADAI and ~[Koma.RYU, Koma.UMA, Koma.HI, Koma.KAKU, Koma.KYO].indexOf(koma)
     # 縦横をとっとく
     beforeX = before / 10 | 0 , beforeY = before % 10
     afterX = after / 10 | 0, afterY = after % 10
@@ -93,6 +99,7 @@ isValidMove = (koma, before, after, sengo) ->
 
   return false if before = after
   return false if after is Masu.KOMADAI
+  return true if before is Masu.KOMADAI
 
   # 後手の指手の場合、ひっくり返す
   # 例 28 => 82
@@ -104,8 +111,6 @@ isValidMove = (koma, before, after, sengo) ->
   beforeX = before / 10 | 0 , beforeY = before % 10
   afterX = after / 10 | 0, afterY = after % 10
   
-  if before is Masu.KOMADAI
-
   # 右・上が＋
   diffX = beforeX - afterX #右
   diffY = beforeY - afterY #上
@@ -152,7 +157,23 @@ hasIkidokoro = (koma, after, sengo) ->
 
   switch koma
     when Koma.KEI
-      return afterY isnt 2 and afterY isnt 1
+      afterY isnt 2 and afterY isnt 1
     when Koma.KYO, Koma.FU
-      return afterY isnt 1
-    else return true
+      afterY isnt 1
+    else true
+
+# なれるか
+canNari = (koma, before, after, sengo) ->
+  if not sengo? or not Sengo.isValid(sengo)
+    console.log '先後指定してないよ'
+    return false
+  return false if before is Koma.KOMADAI
+  return false if not Koma.canNari(koma)
+
+  beforeY = before % 10, afterY = after % 10
+  if sengo is Sengo.GOTE
+    beforeY = 10 - beforeY
+    afterY = 10 - afterY
+
+  afterY <= 3 or beforeY <= 3
+
