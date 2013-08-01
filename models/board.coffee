@@ -12,4 +12,4 @@ boardSchema = new Schema(
 boardSchema.methods.testMethod = ->
   'abc'
 
-module.exports = mongoose.model('boards', boardSchema)
+module.exports = mongoose.model('Board', boardSchema)

@@ -37,7 +37,6 @@ exports.Koma = Koma =
   TO: -1
   NFU: -1
 
-
   nari: (koma) ->
     switch koma
       when @HI then @RYU
