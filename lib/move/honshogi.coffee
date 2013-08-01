@@ -1,8 +1,9 @@
 _ = require('underscore')
 
 consts = require('/lib/consts')
-Masu = consts.Masu
+Masu = require('lib/masu')
 Koma = require('/lib/koma')
+Sengo = consts.Sengo
 
 # board: Board
 # sasite: {masu: {before: Number, after: Number}, koma: Number, sengo: Number, nari: Boolean}
@@ -40,14 +41,53 @@ module.exports = (board, sasite, callback) ->
 
   __before = undefined
 
+  # afterに自分の駒がないかチェック
+  __after = _.find board, (factor) ->
+    sasite.masu.after is factor.masu and sasite.sengo is factor.sengo
+  if __after?
+    callback {changed: false, reason: 'sasite.after の場所に自分の駒がいます'}
+    return
+
   # 動きチェック
   sengo = sasite.sengo
   koma = sasite.koma
   before = sasite.masu.before
   after = sasite.masu.after
 
+  if not isValidMove(koma, before, after, sengo) ->
+    callback {changed: false, reason: 'sasite move is not valid'}
+    return
+
+  if not hasIkidokoro(koma, after, sengo) ->
+    callback {changed: false, reason: '行きどころのない駒'}
+    return
+
+  # 竜馬角飛香の間に駒がないか
+  if ~[Koma.RYU, Koma.UMA, Koma.HI, Koma.KAKU, Koma.KYO].indexOf(koma)
+    # 縦横をとっとく
+    beforeX = before / 10 | 0 , beforeY = before % 10
+    afterX = after / 10 | 0, afterY = after % 10
+  
+    diffX = afterX - beforeX
+    diffY = afterY - beforeY
+
+    # 方向 1,-1,0のどれか
+    directX = if diffX then diffX/Math.abs(diffX) else 0
+    directY = if diffY then diffY/Math.abs(diffY) else 0
+
+    # 1こ動かす
+    tmpX = beforeX + directX, tmpY = beforeY + directY
+    # 1こで終わりならOK
+    while tmpX isnt afterX and tmpY isnt afterY
+      if (_.find board, (factor) -> tmp is factor.masu) ?
+        callback {changed: false, reason: '間に駒がはさまってる'}
+        return
+      tmpX += directX, tmpY += directY
+      # TODO 無限ループにはならないはずだが、念のためチェックが必要か？
+
+
 isValidMove = (koma, before, after, sengo) ->
-  if not sengo?
+  if not sengo? or not Sengo.isValid(sengo)
     console.log '先後指定してないよ'
     return false
 
@@ -56,7 +96,7 @@ isValidMove = (koma, before, after, sengo) ->
 
   # 後手の指手の場合、ひっくり返す
   # 例 28 => 82
-  if not sengo
+  if sengo is Sengo.GOTE
     before = 110 - before
     after = 110 - after
   
@@ -65,15 +105,6 @@ isValidMove = (koma, before, after, sengo) ->
   afterX = after / 10 | 0, afterY = after % 10
   
   if before is Masu.KOMADAI
-
-    ###
-    switch koma
-      when Koma.KEI
-        return afterX isnt 2 and afterX isnt 1
-      when Koma.KYO, Koma.FU
-        return afterX isnt 1
-      else return true
-    ###
 
   # 右・上が＋
   diffX = beforeX - afterX #右
@@ -110,4 +141,18 @@ isValidMove = (koma, before, after, sengo) ->
     when Koma.FU
       beforeX is afterX and diffY is 1
 
+# 行きどころのある駒
+hasIkidokoro = (koma, after, sengo) ->
+  if not sengo? or not Sengo.isValid(sengo)
+    console.log '先後指定してないよ'
+    return false
 
+  afterY = after % 10
+  afterY = 10 - afterY if sengo is Sengo.GOTE
+
+  switch koma
+    when Koma.KEI
+      return afterY isnt 2 and afterY isnt 1
+    when Koma.KYO, Koma.FU
+      return afterY isnt 1
+    else return true
