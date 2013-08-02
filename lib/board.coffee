@@ -1,8 +1,8 @@
-_ = require('underscore')
+Koma = require('lib/koma')
 
 exports.initBoard = ->
   factors = []
-  _.each _.range(1,10), (num) ->
+  for num in [1..9] ->
     factors.push { koma: Koma.FU, sengo: Sengo.SENTE, masu: num * 10 + 7 }
     factors.push { koma: Koma.FU, sengo: Sengo.GOTE, masu: num * 10 + 3 }
   factors.push(

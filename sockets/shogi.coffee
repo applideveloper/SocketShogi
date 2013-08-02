@@ -2,12 +2,12 @@ _ = require('underscore')
 
 module.exports = (io) ->
   move = require('../lib/move')
-  consts = require('../lib/consts')
-  Koma = consts.Koma
-  Masu = consts.Masu
-  Sengo = consts.Sengo
+  Koma = require('../lib/koma')
+  Masu = require('../lib/masu')
+  Sengo = require('../lib/sengo')
+  Board = require('../lib/board')
   # karidesu
-  board = consts.initBoard()
+  board = Board.initBoard()
 
   nsShogi = io.of('/shogi')
   nsShogi.on 'connection', (socket) ->
