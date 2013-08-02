@@ -1,8 +1,9 @@
-Koma = require('lib/koma')
+Koma = require('./koma')
+Sengo = require('./sengo')
 
 exports.initBoard = ->
   factors = []
-  for num in [1..9] ->
+  for num in [1..9]
     factors.push { koma: Koma.FU, sengo: Sengo.SENTE, masu: num * 10 + 7 }
     factors.push { koma: Koma.FU, sengo: Sengo.GOTE, masu: num * 10 + 3 }
   factors.push(

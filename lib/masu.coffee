@@ -4,6 +4,4 @@ module.exports =
   isValid: (masu) ->
     return true if masu is this.KOMADAI
     # 11~99 ただし20とかはだめ
-    masu is masu | 0
-      and masu % 10 isnt 0
-      and 11 <= masu and masu <= 99
+    masu is masu | 0 and masu % 10 isnt 0 and 11 <= masu and masu <= 99
