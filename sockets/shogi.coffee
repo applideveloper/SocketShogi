@@ -2,10 +2,9 @@ _ = require('underscore')
 
 module.exports = (io) ->
   move = require('../lib/move')
-  consts = require('../lib/consts')
-  Koma = consts.Koma
-  Masu = consts.Masu
-  Sengo = consts.Sengo
+  Koma = require('../lib/koma')
+  Masu = require('../lib/masu')
+  Sengo = require('../lib/sengo')
   # karidesu
   board = consts.initBoard()
 
