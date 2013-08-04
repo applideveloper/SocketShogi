@@ -1,4 +1,4 @@
-exports.Sengo = Sengo =
+module.exports = Sengo =
   SENTE: 101
   GOTE: 102
   isValid: (sengo) ->

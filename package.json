@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node-dev app.coffee"
   },
+  "test": "mocha -R spec",
   "dependencies": {
     "express": "3.3.3",
     "jade": "*",
@@ -14,6 +15,8 @@
     "connect-flash": "*",
     "socket.io": "*",
     "async": "*",
-    "underscore": "*"
+    "underscore": "*",
+    "mocha": "*",
+    "should": "*"
   }
 }

@@ -1,9 +1,8 @@
 _ = require('underscore')
 
-consts = require('/lib/consts')
 Masu = require('lib/masu')
 Koma = require('/lib/koma')
-Sengo = consts.Sengo
+Sengo = require('/lib/sengo')
 
 # board: Board
 # sasite: {masu: {before: Number, after: Number}, koma: Number, sengo: Number, nari: Boolean[非必須]}
