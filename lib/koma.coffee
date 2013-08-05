@@ -36,6 +36,9 @@ module.exports =
       when @NKYO then @KYO
       when @FU then @TO
       when @TO then @FU
+
+  toNama: (koma) ->
+    if @isNarigoma(koma) then @nari(koma) else koma
   
   isNarigoma: (koma) ->
     !!~[@RYU, @UMA, @NGIN, @NKEI, @NKYO, @TO].indexOf(koma)

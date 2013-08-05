@@ -22,6 +22,4 @@ _.mixin isEqualAsSet: (array, other) ->
   # ary1,ary2ともに空になっているはず
   return true
 
-console.log _.isEqualAsSet([], [])
-
 module.exports = _
