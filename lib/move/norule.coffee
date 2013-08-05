@@ -11,7 +11,6 @@ Sengo = require('../sengo')
 # info: {isValid: Boolean, reason: String (if not changed) }
 # newBoard: Board (if isValid)
 module.exports = (board, sasite, callback) ->
-  console.log callback
   if not callback? or (typeof callback) isnt 'function'
     throw new Error('callback is null or not a function')
 

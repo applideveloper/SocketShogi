@@ -68,3 +68,31 @@ describe '本将棋', ->
           factor.masu == 77
         aBoard.push {masu: 76, koma: Koma.FU, sengo: Sengo.SENTE}
         _.isEqualAsSet(newBoard, aBoard).should.true
+
+    it '初期局面から後手73歩=>74歩', ->
+      moveHonshogi initBoard, {masu: {before: 73, after: 74}, koma: Koma.FU, sengo: Sengo.GOTE}, (err, newBoard) ->
+        should.not.exist err
+        aBoard = _.reject initBoard, (factor) ->
+          factor.masu == 73
+        aBoard.push {masu: 74, koma: Koma.FU, sengo: Sengo.GOTE}
+        _.isEqualAsSet(newBoard, aBoard).should.true
+
+    it '初期局面から77歩=>75歩 : err', ->
+      moveHonshogi initBoard, {masu: {before: 77, after: 75}, koma: Koma.FU, sengo: Sengo.SENTE}, (err, newBoard) ->
+        should.exist err
+        should.not.exist newBoard
+
+    it '初期局面から88角=>55角 : err', ->
+      moveHonshogi initBoard, {masu: {before: 88, after: 55}, koma: Koma.KAKU, sengo: Sengo.SENTE}, (err, newBoard) ->
+        should.exist err
+        should.not.exist newBoard
+
+    it '初期局面から28飛=>68飛', ->
+      moveHonshogi initBoard, {masu: {before: 28, after: 68}, koma: Koma.HI, sengo: Sengo.SENTE}, (err, newBoard) ->
+        should.not.exist err
+        should.exist newBoard
+
+    it '初期局面から28飛=>98飛 : err', ->
+      moveHonshogi initBoard, {masu: {before: 28, after: 98}, koma: Koma.HI, sengo: Sengo.SENTE}, (err, newBoard) ->
+        should.exist err
+        should.not.exist newBoard

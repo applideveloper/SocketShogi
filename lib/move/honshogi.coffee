@@ -84,8 +84,8 @@ module.exports = (board, sasite, callback) ->
     tmpX = beforeX + directX
     tmpY = beforeY + directY
     # 1こで終わりならOK
-    while tmpX isnt afterX and tmpY isnt afterY
-      if (_.find board, (factor) -> tmp is factor.masu)?
+    while tmpX isnt afterX or tmpY isnt afterY
+      if (_.find board, (factor) -> tmpX * 10 + tmpY is factor.masu)?
         callback new Error('間に駒がはさまってる')
         return
       tmpX += directX
@@ -122,7 +122,7 @@ isValidMove = (koma, before, after, sengo) ->
     console.log '先後指定してないよ'
     return false
 
-  return false if before = after
+  return false if before is after
   return false if after is Masu.KOMADAI
   return true if before is Masu.KOMADAI
 
@@ -171,7 +171,6 @@ isValidMove = (koma, before, after, sengo) ->
     when Koma.KYO
       beforeX is afterX and diffY > 0
     when Koma.FU
-      console.log 'FU!'
       beforeX is afterX and diffY is 1
 
 # 行きどころのある駒
